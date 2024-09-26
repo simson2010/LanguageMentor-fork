@@ -1,0 +1,22 @@
+{
+    "models":[
+        {
+            "name": "gpt-4o-mini",
+            "type": "openai",
+            "api_key": "<your key here>",
+            "base_url": "https://api.openai.com/v1"
+        },
+        {
+            "name": "gpt-4o",
+            "type": "openai",
+            "api_key": "<your key here>",
+            "base_url": "https://api.openai.com/v1"
+        },
+        {
+            "name": "llama3.2",
+            "type": "ollama",
+            "api_key": "",
+            "base_url": "http://localhost:11434"
+        }   
+    ]
+}
