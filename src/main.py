@@ -4,14 +4,15 @@ from agents.scenario_agent import ScenarioAgent  # 导入场景代理类
 from utils.logger import LOG  # 导入日志记录工具
 
 # 创建对话代理实例
-conversation_agent = ConversationAgent()
+conversation_agent = ConversationAgent() 
 
 # 定义场景代理的选择与调用
 agents = {
     "job_interview": ScenarioAgent("job_interview"),  # 求职面试场景代理
     "hotel_checkin": ScenarioAgent("hotel_checkin"),  # 酒店入住场景代理
     # "salary_negotiation": ScenarioAgent("salary_negotiation"),  # 薪资谈判场景代理（注释掉）
-    # "renting": ScenarioAgent("renting")  # 租房场景代理（注释掉）
+    "renting": ScenarioAgent("renting"),  # 租房场景代理（注释掉）
+    "travel_planning": ScenarioAgent("travel_planning")  # 旅行规划场景代理
 }
 
 # 处理用户对话的函数
@@ -22,7 +23,7 @@ def handle_conversation(user_input, chat_history):
 
 # 获取场景介绍的函数
 def get_scenario_intro(scenario):
-    with open(f"content/page/{scenario}.md", "r") as file:  # 打开对应场景的介绍文件
+    with open(f"content/page/{scenario}.md", "r", encoding="utf-8") as file:  # 打开对应场景的介绍文件
         scenario_intro = file.read().strip()  # 读取文件内容并去除多余空白
     return scenario_intro  # 返回场景介绍内容
 
@@ -43,7 +44,8 @@ with gr.Blocks(title="LanguageMentor 英语私教") as language_mentor_app:
                 ("求职面试", "job_interview"),  # 求职面试选项
                 ("酒店入住", "hotel_checkin"),  # 酒店入住选项
                 # ("薪资谈判", "salary_negotiation"),  # 薪资谈判选项（注释掉）
-                # ("租房", "renting")  # 租房选项（注释掉）
+                ("租房", "renting"),  # 租房选项（注释掉）
+                ("旅行规划", "travel_planning")  # 旅行规划选项
             ], 
             label="场景"  # 单选框标签
         )
@@ -60,7 +62,7 @@ with gr.Blocks(title="LanguageMentor 英语私教") as language_mentor_app:
 
             return gr.Chatbot(
                 value=[(None, initial_ai_message)],  # 设置聊天机器人的初始消息
-                height=600,  # 聊天窗口高度
+                height=350,  # 聊天窗口高度
             )
         
         # 更新场景介绍并在场景变化时启动新会话
