@@ -85,5 +85,6 @@ class AgentBase(ABC):
             {"configurable": {"session_id": session_id}},  # 传入配置，包括会话ID
         )
 
+        LOG.debug(f"[ChatBot][User:] {user_input}")  # 记录调试日志
         LOG.debug(f"[ChatBot][{self.name}] {response.content}")  # 记录调试日志
         return response.content  # 返回生成的回复内容
