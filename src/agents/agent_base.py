@@ -1,6 +1,8 @@
 import json
 from abc import ABC, abstractmethod
 
+
+from langchain_openai import ChatOpenAI
 from langchain_ollama.chat_models import ChatOllama  # 导入 ChatOllama 模型
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder  # 导入提示模板相关类
 from langchain_core.messages import HumanMessage  # 导入消息类
@@ -55,8 +57,8 @@ class AgentBase(ABC):
         ])
 
         # 初始化 ChatOllama 模型，配置参数
-        self.chatbot = system_prompt | ChatOllama(
-            model="llama3.1:8b-instruct-q8_0",  # 使用的模型名称
+        self.chatbot = system_prompt | ChatOpenAI(
+            model="gpt-4o-mini",  # 使用的模型名称
             max_tokens=8192,  # 最大生成的 token 数
             temperature=0.8,  # 随机性配置
         )
