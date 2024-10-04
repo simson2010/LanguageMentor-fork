@@ -1,7 +1,7 @@
 import json
 from abc import ABC, abstractmethod
 
-
+import os
 from langchain_openai import ChatOpenAI
 from langchain_ollama.chat_models import ChatOllama  # 导入 ChatOllama 模型
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder  # 导入提示模板相关类
@@ -57,8 +57,10 @@ class AgentBase(ABC):
         ])
 
         # 初始化 ChatOllama 模型，配置参数
+        base_url = os.getenv("OLLAMA_BASE_URL")
         self.chatbot = system_prompt | ChatOllama(
             model="llama3.1:8b-instruct-q8_0",  # 使用的模型名称
+            base_url= base_url if base_url is not None else "http://localhost:11434",
             max_tokens=8192,  # 最大生成的 token 数
             temperature=0.8,  # 随机性配置
         )

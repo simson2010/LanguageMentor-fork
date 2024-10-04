@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 jupyter/*
+
+test_results.txt
