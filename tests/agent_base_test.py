@@ -1,11 +1,13 @@
 #create unit test for agent_base with unittest
 import unittest
+from unittest.mock import patch, MagicMock
 import sys
 import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
 from agents.agent_base import AgentBase
+
 
 class TestAgentBase(unittest.TestCase):
 
@@ -85,7 +87,36 @@ class TestAgentBase(unittest.TestCase):
             testAgent.load_intro()
         self.assertEqual(str(context.exception), f"初始消息文件 {self.invalid_intro_file} 包含无效的 JSON!")
 
-        # Clean up the invalid file
+
+    def test_chat_with_history(self):
+        # Create a mock chatbot response
+        mock_response = MagicMock()
+        mock_response.content = "AI response"
+        
+        # Set up the mock for the chatbot_with_history
+        class MockChatWithHistory:
+            def __init__(self):
+                self.called = 0
+                pass
+            def invoke(self, parm1, parm2):
+                self.called = 1
+                return mock_response
+
+        # Create an instance of the test subclass of AgentBase
+        agent = AgentBase("TestAgent", self.dummy_prompt_file, self.valid_json_file)
+        mock_chatbot_with_history = MockChatWithHistory()
+        agent.chatbot_with_history = mock_chatbot_with_history
+        # Mock the session history
+
+        # Call the chat_with_history method
+        user_input = "Hello, AI!"
+        result = agent.chat_with_history(user_input)
+
+        self.assertEqual(mock_chatbot_with_history.called, 1)
+        # Assertions to check if the chatbot was invoked correctly
+        self.assertEqual(result, "AI response")  # Check if the result matches the mock response
+
+        
 
 
 if __name__ == "__main__":
