@@ -5,3 +5,5 @@ langchain_openai==0.1.25
 langchain_ollama==0.1.3
 gradio==4.43.0
 loguru==0.7.2
+pytest==7.4.4
+pytest-cov==5.0.0
