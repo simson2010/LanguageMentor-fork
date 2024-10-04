@@ -66,6 +66,17 @@ https://github.com/user-attachments/assets/6298a8e4-28fc-4a60-badc-59bff16b315e
    ![gradio_demo_0](images/gradio_0.png)
    ![gradio_demo_1](images/gradio_1.png)
 
+6. **运行测试**
+   确保步骤**1**, **2**, **3**运行成功，然后转到控制台/windows命令行,执行：
+   ```
+   $> run_test_report.sh
+   ```
+   或者 [windows]
+   ```
+   $> run_test_report.cmd
+   ```
+   测试报告将保存在htmlcov目录下的HTML文件。
+   
 
 ## 贡献
 欢迎对本项目做出贡献！你可以通过以下方式参与：
