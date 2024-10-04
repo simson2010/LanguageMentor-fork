@@ -4,7 +4,7 @@
 FROM python:3.12-slim
 
 # 设置工作目录
-WORKDIR /src
+WORKDIR /app
 
 # 复制 requirements.txt 并安装依赖
 COPY requirements.txt .
